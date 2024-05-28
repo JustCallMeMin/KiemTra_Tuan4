@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <title>Role List</title>
+</head>
+<body>
+<div class="container">
+    <h1>Role List</h1>
+    <a class="btn btn-primary" th:href="@{/roles/create}">Create New Role</a>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Role Name</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="role : ${roles}">
+            <td th:text="${role.role_id}">1</td>
+            <td th:text="${role.role_name}">Role Name</td>
+            <td>
+                <a class="btn btn-warning" th:href="@{/roles/edit/{id}(id=${role.role_id})}">Edit</a>
+                <form th:action="@{/roles/delete/{id}(id=${role.role_id})}" method="post" style="display:inline;">
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this role?');">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
